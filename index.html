@@ -8,37 +8,47 @@
 	<link rel="stylesheet" href="display.css" type="text/css" />
 </head>
 <body>
-	<span ng-repeat="slot in cube.flat">{{ slot.id }} </span><br/>
+<!-- 	<span ng-repeat="slot in cube.flat">{{ slot.id }} </span><br/> -->
 	
-	<face ng-repeat="slots in ['slots', 'slots270', 'slots180', 'slots90']">
-		<slot ng-repeat="slot in cube.faces[0][slots]">{{ slot.id }}</slot>
+	<faces ng-repeat="i in [2,3,4,5,0,1]">
+		<face><slot ng-repeat="slot in cube.faces[i].relative(0)">{{ slot.id }}</slot></face>
+			<br/>
+		<face><slot ng-repeat="slot in cube.faces[i].relative(3)">{{ slot.id }}</slot></face>
+		<face mid><slot ng-repeat="slot in cube.faces[i].slots">{{ slot.id }}</slot></face>
+		<face><slot ng-repeat="slot in cube.faces[i].relative(1)">{{ slot.id }}</slot></face>
+			<br/>
+		<face><slot ng-repeat="slot in cube.faces[i].relative(2)">{{ slot.id }}</slot></face>
+	</faces>
+	
+	<br/>
+	
+	<face ng-repeat="transform in [0, 1, 2, 3]">
+		<slot ng-repeat="slot in cube.faces[0].slots|rotate:transform">{{ slot.id }}</slot>
 	</face>
 	<br/>
+	
+<!-- 	<face ng-repeat="slots in ['slots', 'slots270', 'slots180', 'slots90']"> -->
+<!-- 		<slot ng-repeat="slot in cube.faces[0][slots]">{{ slot.id }}</slot> -->
+<!-- 	</face> -->
+<!-- 	<br/> -->
+	
 	<face ng-repeat="i in [2,3,4,5]">
 		<slot ng-repeat="slot in cube.faces[i].slots">{{ slot.id }}</slot>
 	</face>
 	<br/>
-	<face ng-repeat="slots in ['slots', 'slots90', 'slots180', 'slots270']">
-		<slot ng-repeat="slot in cube.faces[1][slots]">{{ slot.id }}</slot>
+	<face ng-repeat="transform in [0, 3, 2, 1]">
+		<slot ng-repeat="slot in cube.faces[1].slots|rotate:transform">{{ slot.id }}</slot>
 	</face>
 	<br/>
+<!-- 	<face ng-repeat="slots in ['slots', 'slots90', 'slots180', 'slots270']"> -->
+<!-- 		<slot ng-repeat="slot in cube.faces[1][slots]">{{ slot.id }}</slot> -->
+<!-- 	</face> -->
+<!-- 	<br/> -->
 	<face ng-repeat="i in [4,5]">
 		<slot ng-repeat="slot in cube.faces[i].slots180">{{ slot.id }}</slot>
 	</face>
 	
 	<br/>
-	<faces ng-repeat="i in [0,1,2,3,4,5]">
-		<face><slot ng-repeat="slot in cube.faces[i].up()">{{ slot.id }}</slot></face>
-		<br/>
-		<face><slot ng-repeat="slot in cube.faces[i].left()">{{ slot.id }}</slot></face>
-		<face><slot ng-repeat="slot in cube.faces[i].slots">{{ slot.id }}</slot></face>
-		<face><slot ng-repeat="slot in cube.faces[i].right()">{{ slot.id }}</slot></face>
-		<br/>
-		<face><slot ng-repeat="slot in cube.faces[i].down()">{{ slot.id }}</slot></face>
-	</faces>
 	
-<!-- 	<face ng-style="{width: (52 * 3)+'px'}"> -->
-<!-- 		<slot ng-repeat="i in [0,1,2,3,4,5,6,7,8]"></slot> -->
-<!-- 	</face> -->
 </body>
 </html>
