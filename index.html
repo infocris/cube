@@ -3,52 +3,70 @@
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 	<script src="http://underscorejs.org/underscore-min.js"></script>
+	<script src="three.min.js"></script>
+	<script src="app/app.js"></script>
+	<script src="app/app.slot.js"></script>
+	<script src="app/app.mid.js"></script>
 	<script src="game.js"></script>
-	<script src="app.js"></script>
+	<script src="cube/Face.js"></script>
+	<script src="cube/Slot.js"></script>
+	<script src="3d.js"></script>
 	<link rel="stylesheet" href="display.css" type="text/css" />
 </head>
 <body>
 <!-- 	<span ng-repeat="slot in cube.flat">{{ slot.id }} </span><br/> -->
 	
-	<faces ng-repeat="i in [2,3,4,5,0,1]">
-		<face><slot ng-repeat="slot in cube.faces[i].relative(0)">{{ slot.id }}</slot></face>
+<!-- 	<faces ng-repeat="i in [2,3,4,5,0,1]"> -->
+<!-- 		<face><slot ng-class="['color'+slot.color]" ng-repeat="slot in cube.faces[i].relative(0)"></slot></face> -->
+<!-- 			<br/> -->
+<!-- 		<face><slot ng-class="['color'+slot.color]" ng-repeat="slot in cube.faces[i].relative(3)"></slot></face> -->
+<!-- 		<face mid><slot ng-class="['color'+slot.color]" ng-repeat="slot in cube.faces[i].slots"></slot></face> -->
+<!-- 		<face><slot ng-class="['color'+slot.color]" ng-repeat="slot in cube.faces[i].relative(1)"></slot></face> -->
+<!-- 			<br/> -->
+<!-- 		<face><slot ng-class="['color'+slot.color]" ng-repeat="slot in cube.faces[i].relative(2)"></slot></face> -->
+<!-- 	</faces> -->
+	
+	<faces ng-repeat="i in [2,0,1]">
+<!-- 	<faces ng-repeat="i in [2,3,4,5,0,1]"> -->
+		<face><slot ng-repeat="slot in cube.faces[i].relative(0)"></slot></face>
 			<br/>
-		<face><slot ng-repeat="slot in cube.faces[i].relative(3)">{{ slot.id }}</slot></face>
-		<face mid><slot ng-repeat="slot in cube.faces[i].slots">{{ slot.id }}</slot></face>
-		<face><slot ng-repeat="slot in cube.faces[i].relative(1)">{{ slot.id }}</slot></face>
+		<face><slot ng-repeat="slot in cube.faces[i].relative(3)"></slot></face>
+		<face mid><slot ng-repeat="slot in cube.faces[i].slots"></slot></face>
+		<face><slot ng-repeat="slot in cube.faces[i].relative(1)"></slot></face>
 			<br/>
-		<face><slot ng-repeat="slot in cube.faces[i].relative(2)">{{ slot.id }}</slot></face>
+		<face><slot ng-repeat="slot in cube.faces[i].relative(2)"></slot></face>
 	</faces>
+	
+	<div id="render" style="float: right;"></div>
 	
 	<br/>
 	
 	<face ng-repeat="transform in [0, 1, 2, 3]">
-		<slot ng-repeat="slot in cube.faces[0].slots|rotate:transform">{{ slot.id }}</slot>
+		<slot ng-repeat="slot in cube.faces[0].slots|rotate:transform"></slot>
 	</face>
 	<br/>
 	
 <!-- 	<face ng-repeat="slots in ['slots', 'slots270', 'slots180', 'slots90']"> -->
-<!-- 		<slot ng-repeat="slot in cube.faces[0][slots]">{{ slot.id }}</slot> -->
+<!-- 		<slot ng-repeat="slot in cube.faces[0][slots]"></slot> -->
 <!-- 	</face> -->
 <!-- 	<br/> -->
 	
 	<face ng-repeat="i in [2,3,4,5]">
-		<slot ng-repeat="slot in cube.faces[i].slots">{{ slot.id }}</slot>
+		<slot ng-repeat="slot in cube.faces[i].slots"></slot>
 	</face>
 	<br/>
 	<face ng-repeat="transform in [0, 3, 2, 1]">
-		<slot ng-repeat="slot in cube.faces[1].slots|rotate:transform">{{ slot.id }}</slot>
+		<slot ng-repeat="slot in cube.faces[1].slots|rotate:transform"></slot>
 	</face>
 	<br/>
 <!-- 	<face ng-repeat="slots in ['slots', 'slots90', 'slots180', 'slots270']"> -->
-<!-- 		<slot ng-repeat="slot in cube.faces[1][slots]">{{ slot.id }}</slot> -->
+<!-- 		<slot ng-repeat="slot in cube.faces[1][slots]"></slot> -->
 <!-- 	</face> -->
 <!-- 	<br/> -->
 	<face ng-repeat="i in [4,5]">
-		<slot ng-repeat="slot in cube.faces[i].slots180">{{ slot.id }}</slot>
+		<slot ng-repeat="slot in cube.faces[i].slots180"></slot>
 	</face>
 	
 	<br/>
-	
 </body>
 </html>
